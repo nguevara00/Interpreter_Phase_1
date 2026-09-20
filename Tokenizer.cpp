@@ -115,27 +115,20 @@ Token Tokenizer::getToken() {
         token.markAsEof();
     } else {
         char character;
-        std::string multiCharString;
+        std::string multiCharString = "\0";
         getCharacter(character);
 
         if (isDigit(character)) {
             token.setIntegerValue(readInteger(character));
-        } else if (character == '=' && inputStream.peek() == '='){
-                multiCharString = "=="; 
-                token.setMultiCharSymbol(multiCharString);
-                // since i have looked at the next character, and used it, i need to kill the next character in the inputstream.
-        } else if (character == '=' || character == '+' || character == '-' ||
-                   character == '*' || character == '/' || character == '%' ||
-                   character == ';' || character == '(' || character == ')' ||
-                   character == '{' || character == '}' || character == '>' ||
-                   character == '<' || character == '!') {
-            // need new code here. if its a =, it might be a ==
-            // if (inputStream.peek() == '=') {
-            //     token.setMultiCharSymbol(multiCharString);
-            // } else {
-            // }
-            //
-            token.setSymbol(character);
+        } else if (character == '=' || character == '+' || character == '-' || character == '*' || character == '/' || character == '%' || character == ';' || character == '(' || character == ')' || character == '{' || character == '}' || character == '>' ||character == '<' ) {
+                    if ((character == '=' || character == '<' || character == '>' || character == '!') && inputStream.peek() == '='){
+                        multiCharString += character;
+                        getCharacter(character);
+                        multiCharString += character;
+                        token.setMultiCharSymbol(multiCharString);
+                    } else {
+                        token.setSymbol(character);
+                    }
         } else if (isIdentifierStart(character)) {
             std::string identifier = readIdentifier(character);
             if (identifier == "for")
