@@ -39,6 +39,16 @@ public:
     [[nodiscard]] bool isModuloOperator() const { return _symbol == '%'; }
     [[nodiscard]] bool isDivisionOperator() const { return _symbol == '/'; }
 
+    // New Relational Operators
+    [[nodiscard]] bool isEqualityOperator() const { return _symbol == ' == '; }
+    [[nodiscard]] bool isNotEqualOperator() const { return _symbol == ' != '; }
+    [[nodiscard]] bool isGreaterThanOperator() const { return _symbol == '>'; }
+    [[nodiscard]] bool isGreaterThanOrEqualOperator() const { return _symbol == ' >= '; }
+    [[nodiscard]] bool isLessThanOperator() const { return _symbol == '<'; }
+    [[nodiscard]] bool isLessThanOrEqualOperator() const { return _symbol == ' <= '; }
+    [[nodiscard]] bool isOpenBracket() const { return _symbol == '{'; }
+    [[nodiscard]] bool isClosedBracket() const { return _symbol == '}'; }
+
     void setIdentifier(std::string identifier) { _identifier = std::move(identifier); }
     [[nodiscard]] bool isIdentifier() const { return !_identifier.empty(); }
     [[nodiscard]] const std::string &identifier() const { return _identifier; }
@@ -65,6 +75,7 @@ private:
     bool _newline{false};
     bool _isInteger{false};
     char _symbol{'\0'};
+    std::string _multiCharSymbol{'\0'};
     int _integerValue{0};
     std::size_t _lineNumber{0};
     std::size_t _columnNumber{0};
