@@ -27,6 +27,7 @@ public:
     [[nodiscard]] std::size_t columnNumber() const { return _columnNumber; }
 
     void setSymbol(char symbol) { _symbol = symbol; }
+    void setMultiCharSymbol(std::string& multiCharSymbol) { _multiCharSymbol = multiCharSymbol; }
     [[nodiscard]] char symbol() const { return _symbol; }
 
     [[nodiscard]] bool isOpenParen() const { return _symbol == '('; }

@@ -115,13 +115,17 @@ Token Tokenizer::getToken() {
         token.markAsEof();
     } else {
         char character;
+        std::string multiCharString;
         getCharacter(character);
 
         if (isDigit(character)) {
             token.setIntegerValue(readInteger(character));
+
         } else if (character == '=' || character == '+' || character == '-' ||
                    character == '*' || character == '/' || character == '%' ||
                    character == ';' || character == '(' || character == ')') {
+            // need new code here. if its a =, it might be a ==
+            token.setMultiCharSymbol(multiCharString);
             token.setSymbol(character);
         } else if (isIdentifierStart(character)) {
             std::string identifier = readIdentifier(character);
