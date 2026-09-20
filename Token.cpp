@@ -33,6 +33,22 @@ void Token::print(std::ostream &output) const {
         output << identifier();
     else if (isInteger())
         output << integerValue();
+    else if (isEqualityOperator())
+        output << " == ";
+    else if (isNotEqualOperator())
+    output << " != ";
+    else if (isGreaterThanOperator())
+    output << " > ";
+    else if (isGreaterThanOrEqualOperator())
+    output << " >= ";
+    else if (isLessThanOperator())
+    output << " < ";
+    else if (isLessThanOrEqualOperator())
+    output << " <= ";
+    else if (isOpenBracket())
+    output << " { ";
+    else if (isClosedBracket())
+    output << " } ";
     else
         output << "uninitialized token";
 }
