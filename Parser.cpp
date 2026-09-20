@@ -91,13 +91,33 @@ AssignmentStatement *Parser::assignmentStatement() {
 ExprNode *Parser::relExpr() {
     // <rel-expr> -> <rel-term> [ <equality-op> <rel-term> ]
     // The optional equality operation is left for students to implement.
-    return relTerm();
+
+    ExprNode *left = relTerm();
+    Token token = tokenizer.getToken();
+
+    while (token.isEqualityOperator() || token.isNotEqualOperator()) {
+        ExprNode *right = relTerm();
+        return new BinaryExprNode(token, left, right);
+    }
+
+    tokenizer.ungetToken();
+    return left;
 }
 
 ExprNode *Parser::relTerm() {
     // <rel-term> -> <rel-primary> [ <ordering-op> <rel-primary> ]
     // The optional ordering operation is left for students to implement.
-    return relPrimary();
+
+    ExprNode *left = relPrimary();
+    Token token = tokenizer.getToken();
+
+    while (token.isLessThanOperator() || token.isLessThanOrEqualOperator() || token.isGreaterThanOperator() || token.isGreaterThanOrEqualOperator()) {
+        ExprNode *right = relPrimary();
+        return new BinaryExprNode(token, left, right);
+    }
+
+    tokenizer.ungetToken();
+    return left;
 }
 
 ExprNode *Parser::relPrimary() {
