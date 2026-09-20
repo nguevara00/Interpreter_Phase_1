@@ -45,6 +45,30 @@ int BinaryExprNode::evaluate(const SymbolTable &symbolTable) const {
                 ", column " + std::to_string(token().columnNumber()));
         return leftValue % rightValue;
     }
+    if (token().isEqualityOperator()) {
+        // if (leftValue == rightValue) {
+        //     return 1;
+        // }
+        //
+        // return 0;
+
+        return leftValue == rightValue;
+    }
+    if (token().isNotEqualOperator()) {
+        return leftValue != rightValue;
+    }
+    if (token().isGreaterThanOperator()) {
+        return leftValue > rightValue;
+    }
+    if (token().isGreaterThanOrEqualOperator()) {
+        return leftValue >= rightValue;
+    }
+    if (token().isLessThanOperator()) {
+        return leftValue < rightValue;
+    }
+    if (token().isLessThanOrEqualOperator()) {
+        return leftValue <= rightValue;
+    }
 
     throw std::logic_error("unsupported infix operator");
 }
