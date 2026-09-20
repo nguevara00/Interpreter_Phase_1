@@ -46,12 +46,6 @@ int BinaryExprNode::evaluate(const SymbolTable &symbolTable) const {
         return leftValue % rightValue;
     }
     if (token().isEqualityOperator()) {
-        // if (leftValue == rightValue) {
-        //     return 1;
-        // }
-        //
-        // return 0;
-
         return leftValue == rightValue;
     }
     if (token().isNotEqualOperator()) {
