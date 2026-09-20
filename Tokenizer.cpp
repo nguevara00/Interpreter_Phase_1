@@ -123,9 +123,15 @@ Token Tokenizer::getToken() {
 
         } else if (character == '=' || character == '+' || character == '-' ||
                    character == '*' || character == '/' || character == '%' ||
-                   character == ';' || character == '(' || character == ')') {
+                   character == ';' || character == '(' || character == ')' ||
+                   character == '{' || character == '}' || character == '>' ||
+                   character == '<' || character == '!') {
             // need new code here. if its a =, it might be a ==
-            token.setMultiCharSymbol(multiCharString);
+            // if (inputStream.peek() == '=') {
+            //     token.setMultiCharSymbol(multiCharString);
+            // } else {
+            // }
+            //
             token.setSymbol(character);
         } else if (isIdentifierStart(character)) {
             std::string identifier = readIdentifier(character);
