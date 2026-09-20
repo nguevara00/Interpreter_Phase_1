@@ -13,6 +13,8 @@ add_executable(ExprInter
     Expr.cpp
     SymbolTable.cpp
     Statements.cpp
+        ForStatement.cpp
+        ForStatement.h
 )
 
 target_compile_options(ExprInter PRIVATE -Wall -Wextra -Wpedantic)
