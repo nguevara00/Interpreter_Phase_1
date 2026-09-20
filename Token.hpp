@@ -40,12 +40,12 @@ public:
     [[nodiscard]] bool isDivisionOperator() const { return _symbol == '/'; }
 
     // New Relational Operators
-    [[nodiscard]] bool isEqualityOperator() const { return _symbol == ' == '; }
-    [[nodiscard]] bool isNotEqualOperator() const { return _symbol == ' != '; }
-    [[nodiscard]] bool isGreaterThanOperator() const { return _symbol == '>'; }
-    [[nodiscard]] bool isGreaterThanOrEqualOperator() const { return _symbol == ' >= '; }
-    [[nodiscard]] bool isLessThanOperator() const { return _symbol == '<'; }
-    [[nodiscard]] bool isLessThanOrEqualOperator() const { return _symbol == ' <= '; }
+    [[nodiscard]] bool isEqualityOperator() const { return _multiCharSymbol == "=="; }
+    [[nodiscard]] bool isNotEqualOperator() const { return _multiCharSymbol == "!="; }
+    [[nodiscard]] bool isGreaterThanOperator() const { return _multiCharSymbol == ">"; }
+    [[nodiscard]] bool isGreaterThanOrEqualOperator() const { return _multiCharSymbol == ">="; }
+    [[nodiscard]] bool isLessThanOperator() const { return _multiCharSymbol == "<"; }
+    [[nodiscard]] bool isLessThanOrEqualOperator() const { return _multiCharSymbol == "<="; }
     [[nodiscard]] bool isOpenBracket() const { return _symbol == '{'; }
     [[nodiscard]] bool isClosedBracket() const { return _symbol == '}'; }
 
