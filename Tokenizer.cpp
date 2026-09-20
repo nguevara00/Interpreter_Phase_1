@@ -120,7 +120,10 @@ Token Tokenizer::getToken() {
 
         if (isDigit(character)) {
             token.setIntegerValue(readInteger(character));
-
+        } else if (character == '=' && inputStream.peek() == '='){
+                multiCharString = "=="; 
+                token.setMultiCharSymbol(multiCharString);
+                // since i have looked at the next character, and used it, i need to kill the next character in the inputstream.
         } else if (character == '=' || character == '+' || character == '-' ||
                    character == '*' || character == '/' || character == '%' ||
                    character == ';' || character == '(' || character == ')' ||
