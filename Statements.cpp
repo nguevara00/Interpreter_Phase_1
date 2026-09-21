@@ -56,3 +56,18 @@ void PrintStatement::print() const {
     // relExpr->print();
     // std::cout << '\n';
 }
+
+ForStatement::ForStatement(ExprNode *expression) : relExpr{expression} {}
+
+ForStatement::~ForStatement() {
+    delete relExpr;
+};
+
+void ForStatement::evaluate(SymbolTable &symbolTable) const {
+    std::cout << relExpr->evaluate(symbolTable) << std::endl;
+}
+
+void ForStatement::print() const {
+    // relExpr->print();
+    // std::cout << '\n';
+}

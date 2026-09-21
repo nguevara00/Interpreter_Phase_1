@@ -66,7 +66,8 @@ Statement *Parser::statement() {
         return assignmentStatement();
     }
     if (token.isForKeyword())
-        die("Parser::statement", "for-statements are not implemented in the base interpreter", token);
+        tokenizer.ungetToken();
+        return forStatement();
     if (token.isPrintKeyword()) {
         tokenizer.ungetToken();
         return printStatement();
@@ -98,6 +99,22 @@ PrintStatement *Parser::printStatement() {
     }
 
     return new PrintStatement(relExpr());
+}
+
+ForStatement *Parser::forStatement() {
+    // <for-statement> -> "for" ( <assign-statement> ; <rel-expr> ; <assign-statement> ) { NEWLINE <statements> }
+    Token keyword = tokenizer.getToken();
+    if (!keyword.isForKeyword()) {
+        die("Parser::printStatement", "expected 'for'", keyword);
+    }
+    Token parenthesis = tokenizer.getToken();
+    if (!parenthesis.isOpenParen()){
+        die("Parser::forStatement", "expected '('", parenthesis);
+    }
+    AssignmentStatement as = new AssignmentStatement()
+
+
+    return new ForStatement();
 }
 
 ExprNode *Parser::relExpr() {

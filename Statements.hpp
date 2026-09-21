@@ -51,4 +51,13 @@ private:
     ExprNode *relExpr;
 };
 
+class ForStatement final : public Statement {
+public:
+    ForStatement(ExprNode* expression);
+    ~ForStatement() override;
+    void evaluate(SymbolTable &symbolTable) const override;
+    void print() const override;
+private:
+    ExprNode *relExpr;
+};
 #endif // EXPRINTER_STATEMENTS_HPP
