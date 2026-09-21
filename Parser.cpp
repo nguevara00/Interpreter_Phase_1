@@ -67,8 +67,10 @@ Statement *Parser::statement() {
     }
     if (token.isForKeyword())
         die("Parser::statement", "for-statements are not implemented in the base interpreter", token);
-    if (token.isPrintKeyword())
-        die("Parser::statement", "print-statements are not implemented in the base interpreter", token);
+    if (token.isPrintKeyword()) {
+        tokenizer.ungetToken();
+        return printStatement();
+    }
 
     die("Parser::statement", "expected a statement", token);
 }
@@ -86,6 +88,16 @@ AssignmentStatement *Parser::assignmentStatement() {
         die("Parser::assignmentStatement", "expected '='", assignmentOperator);
 
     return new AssignmentStatement(variable.identifier(), relExpr());
+}
+
+PrintStatement *Parser::printStatement() {
+    // <print-statement> -> "print" <rel-expr>
+    Token keyword = tokenizer.getToken();
+    if (!keyword.isPrintKeyword()) {
+        die("Parser::printStatement", "expected 'print'", keyword);
+    }
+
+    return new PrintStatement(relExpr());
 }
 
 ExprNode *Parser::relExpr() {

@@ -41,3 +41,18 @@ void AssignmentStatement::print() const {
     expression->print();
     std::cout << '\n';
 }
+
+PrintStatement::PrintStatement(ExprNode *expression) : relExpr{expression} {}
+
+PrintStatement::~PrintStatement() {
+    delete relExpr;
+};
+
+void PrintStatement::evaluate(SymbolTable &symbolTable) const {
+    symbolTable.setValueFor(variableName, expression->evaluate(symbolTable));
+}
+
+void PrintStatement::print() const {
+    relExpr->print();
+    std::cout << std::endl;
+}
