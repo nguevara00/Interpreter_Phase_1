@@ -57,14 +57,33 @@ void PrintStatement::print() const {
     // std::cout << '\n';
 }
 
-ForStatement::ForStatement(ExprNode *expression) : relExpr{expression} {}
+// initializer, forStatementCompare, forStatementIncr, forloopStatements
+ForStatement::ForStatement(AssignmentStatement *initializer, ExprNode *forStatementCompare, AssignmentStatement *forStatementIncr, Statements *forLoopStatements) :
+    initializer{initializer}, forStatementCompare{forStatementCompare}, forStatementIncr{forStatementIncr}, forLoopStatements{forLoopStatements}
+{}
 
 ForStatement::~ForStatement() {
-    delete relExpr;
+    delete initializer;
+    delete forStatementCompare;
+    delete forStatementIncr;
+    delete forLoopStatements;
 };
 
+// When evaluated, a for statement must:
+//
+// Evaluate the initialization assignment once.
+// Evaluate the relational condition before every iteration.
+// Continue while the condition evaluates to a nonzero value.
+// Evaluate every statement in the loop body.
+// Evaluate the update assignment after each iteration.
+
 void ForStatement::evaluate(SymbolTable &symbolTable) const {
-    std::cout << relExpr->evaluate(symbolTable) << std::endl;
+    initializer->evaluate(symbolTable);
+
+    while (forStatementCompare->evaluate(symbolTable)) {
+        forLoopStatements->evaluate(symbolTable);
+        forStatementIncr->evaluate(symbolTable);
+    }
 }
 
 void ForStatement::print() const {

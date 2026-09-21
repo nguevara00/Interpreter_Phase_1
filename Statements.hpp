@@ -53,11 +53,14 @@ private:
 
 class ForStatement final : public Statement {
 public:
-    ForStatement(ExprNode* expression);
+    ForStatement(AssignmentStatement *initializer, ExprNode *forStatementCompare, AssignmentStatement *forStatementIncr, Statements *forLoopStatements);
     ~ForStatement() override;
     void evaluate(SymbolTable &symbolTable) const override;
     void print() const override;
 private:
-    ExprNode *relExpr;
+    AssignmentStatement *initializer;
+    ExprNode *forStatementCompare;
+    AssignmentStatement *forStatementIncr;
+    Statements *forLoopStatements;
 };
 #endif // EXPRINTER_STATEMENTS_HPP
