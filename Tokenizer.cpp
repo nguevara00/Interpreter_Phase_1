@@ -120,8 +120,8 @@ Token Tokenizer::getToken() {
 
         if (isDigit(character)) {
             token.setIntegerValue(readInteger(character));
-        } else if (character == '=' || character == '+' || character == '-' || character == '*' || character == '/' || character == '%' || character == ';' || character == '(' || character == ')' || character == '{' || character == '}' || character == '>' ||character == '<' ) {
-                    if ((character == '=' || character == '<' || character == '>' || character == '!') && inputStream.peek() == '='){
+        } else if (character == '!' || character == '=' || character == '+' || character == '-' || character == '*' || character == '/' || character == '%' || character == ';' || character == '(' || character == ')' || character == '{' || character == '}' || character == '>' ||character == '<' ) {
+                    if ((character == '=' || character == '<' || character == '>' || character == '!') && inputStream.peek() == '=') {
                         multiCharString += character;
                         getCharacter(character);
                         multiCharString += character;
