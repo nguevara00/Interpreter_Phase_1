@@ -49,10 +49,10 @@ PrintStatement::~PrintStatement() {
 };
 
 void PrintStatement::evaluate(SymbolTable &symbolTable) const {
-    symbolTable.setValueFor(variableName, expression->evaluate(symbolTable));
+    std::cout << relExpr->evaluate(symbolTable) << std::endl;
 }
 
 void PrintStatement::print() const {
-    relExpr->print();
-    std::cout << std::endl;
+    // relExpr->print();
+    std::cout << "\n";
 }
