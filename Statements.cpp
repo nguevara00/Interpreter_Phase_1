@@ -54,5 +54,5 @@ void PrintStatement::evaluate(SymbolTable &symbolTable) const {
 
 void PrintStatement::print() const {
     // relExpr->print();
-    std::cout << "\n";
+    // std::cout << '\n';
 }

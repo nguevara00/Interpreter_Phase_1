@@ -49,7 +49,6 @@ public:
     void print() const override;
 private:
     ExprNode *relExpr;
-    int number;
 };
 
 #endif // EXPRINTER_STATEMENTS_HPP
